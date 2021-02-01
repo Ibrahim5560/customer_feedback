@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-messages-heading" jhiTranslate="customerFeedBackApp.messages.home.createOrEditLabel">Create or edit a Messages</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.counter" for="field_counter">Counter</label>
+                    <input type="number" class="form-control" name="counter" id="field_counter"
+                           formControlName="counter"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.trsId" for="field_trsId">Trs Id</label>
+                    <input type="number" class="form-control" name="trsId" id="field_trsId"
+                           formControlName="trsId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.userId" for="field_userId">User Id</label>
+                    <input type="number" class="form-control" name="userId" id="field_userId"
+                           formControlName="userId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.message" for="field_message">Message</label>
+                    <input type="text" class="form-control" name="message" id="field_message"
+                           formControlName="message"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.status" for="field_status">Status</label>
+                    <input type="number" class="form-control" name="status" id="field_status"
+                           formControlName="status"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.applicantName" for="field_applicantName">Applicant Name</label>
+                    <input type="text" class="form-control" name="applicantName" id="field_applicantName"
+                           formControlName="applicantName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.center" for="field_center">Center</label>
+                    <select class="form-control" id="field_center" name="center" formControlName="centerId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="centerOption.id" *ngFor="let centerOption of centers; trackBy: trackById">{{ centerOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.system" for="field_system">System</label>
+                    <select class="form-control" id="field_system" name="system" formControlName="systemId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="systemOption.id" *ngFor="let systemOption of systems; trackBy: trackById">{{ systemOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.systemServices" for="field_systemServices">System Services</label>
+                    <select class="form-control" id="field_systemServices" name="systemServices" formControlName="systemServicesId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="systemServicesOption.id" *ngFor="let systemServicesOption of systemservices; trackBy: trackById">{{ systemServicesOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="customerFeedBackApp.messages.users" for="field_users">Users</label>
+                    <select class="form-control" id="field_users" name="users" formControlName="usersId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="usersOption.id" *ngFor="let usersOption of users; trackBy: trackById">{{ usersOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

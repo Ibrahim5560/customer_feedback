@@ -1,0 +1,105 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="customerFeedBackApp.messages.home.title">Messages</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-messages" [routerLink]="['/messages/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="customerFeedBackApp.messages.home.createLabel">
+            Create a new Messages
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="messages?.length === 0">
+        <span jhiTranslate="customerFeedBackApp.messages.home.notFound">No messages found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="messages && messages.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="counter"><span jhiTranslate="customerFeedBackApp.messages.counter">Counter</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="trsId"><span jhiTranslate="customerFeedBackApp.messages.trsId">Trs Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span jhiTranslate="customerFeedBackApp.messages.userId">User Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="message"><span jhiTranslate="customerFeedBackApp.messages.message">Message</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="customerFeedBackApp.messages.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applicantName"><span jhiTranslate="customerFeedBackApp.messages.applicantName">Applicant Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="centerId"><span jhiTranslate="customerFeedBackApp.messages.center">Center</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="systemId"><span jhiTranslate="customerFeedBackApp.messages.system">System</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="systemServicesId"><span jhiTranslate="customerFeedBackApp.messages.systemServices">System Services</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usersId"><span jhiTranslate="customerFeedBackApp.messages.users">Users</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let messages of messages ;trackBy: trackId">
+                    <td><a [routerLink]="['/messages', messages.id, 'view']">{{ messages.id }}</a></td>
+                    <td>{{ messages.counter }}</td>
+                    <td>{{ messages.trsId }}</td>
+                    <td>{{ messages.userId }}</td>
+                    <td>{{ messages.message }}</td>
+                    <td>{{ messages.status }}</td>
+                    <td>{{ messages.applicantName }}</td>
+                    <td>
+                        <div *ngIf="messages.centerId">
+                            <a [routerLink]="['/center', messages.centerId , 'view']" >{{ messages.centerId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="messages.systemId">
+                            <a [routerLink]="['/system', messages.systemId , 'view']" >{{ messages.systemId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="messages.systemServicesId">
+                            <a [routerLink]="['/system-services', messages.systemServicesId , 'view']" >{{ messages.systemServicesId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="messages.usersId">
+                            <a [routerLink]="['/users', messages.usersId , 'view']" >{{ messages.usersId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/messages', messages.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/messages', messages.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(messages)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="messages && messages.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

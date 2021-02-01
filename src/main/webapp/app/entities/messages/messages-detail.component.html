@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="messages">
+            <h2><span jhiTranslate="customerFeedBackApp.messages.detail.title">Messages</span> {{ messages.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="customerFeedBackApp.messages.counter">Counter</span></dt>
+                <dd>
+                    <span>{{ messages.counter }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.trsId">Trs Id</span></dt>
+                <dd>
+                    <span>{{ messages.trsId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.userId">User Id</span></dt>
+                <dd>
+                    <span>{{ messages.userId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.message">Message</span></dt>
+                <dd>
+                    <span>{{ messages.message }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.status">Status</span></dt>
+                <dd>
+                    <span>{{ messages.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.applicantName">Applicant Name</span></dt>
+                <dd>
+                    <span>{{ messages.applicantName }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.center">Center</span></dt>
+                <dd>
+                    <div *ngIf="messages.centerId">
+                        <a [routerLink]="['/center', messages.centerId, 'view']">{{ messages.centerId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.system">System</span></dt>
+                <dd>
+                    <div *ngIf="messages.systemId">
+                        <a [routerLink]="['/system', messages.systemId, 'view']">{{ messages.systemId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.systemServices">System Services</span></dt>
+                <dd>
+                    <div *ngIf="messages.systemServicesId">
+                        <a [routerLink]="['/system-services', messages.systemServicesId, 'view']">{{ messages.systemServicesId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messages.users">Users</span></dt>
+                <dd>
+                    <div *ngIf="messages.usersId">
+                        <a [routerLink]="['/users', messages.usersId, 'view']">{{ messages.usersId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/messages', messages.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

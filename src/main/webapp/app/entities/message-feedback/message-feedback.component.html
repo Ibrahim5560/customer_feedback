@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="customerFeedBackApp.messageFeedback.home.title">Message Feedbacks</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-message-feedback" [routerLink]="['/message-feedback/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="customerFeedBackApp.messageFeedback.home.createLabel">
+            Create a new Message Feedback
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="messageFeedbacks?.length === 0">
+        <span jhiTranslate="customerFeedBackApp.messageFeedback.home.notFound">No messageFeedbacks found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="messageFeedbacks && messageFeedbacks.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="systemId"><span jhiTranslate="customerFeedBackApp.messageFeedback.systemId">System Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="centerId"><span jhiTranslate="customerFeedBackApp.messageFeedback.centerId">Center Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="systemServicesId"><span jhiTranslate="customerFeedBackApp.messageFeedback.systemServicesId">System Services Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="counter"><span jhiTranslate="customerFeedBackApp.messageFeedback.counter">Counter</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="trsId"><span jhiTranslate="customerFeedBackApp.messageFeedback.trsId">Trs Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span jhiTranslate="customerFeedBackApp.messageFeedback.userId">User Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="message"><span jhiTranslate="customerFeedBackApp.messageFeedback.message">Message</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="customerFeedBackApp.messageFeedback.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="feedback"><span jhiTranslate="customerFeedBackApp.messageFeedback.feedback">Feedback</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applicantName"><span jhiTranslate="customerFeedBackApp.messageFeedback.applicantName">Applicant Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let messageFeedback of messageFeedbacks ;trackBy: trackId">
+                    <td><a [routerLink]="['/message-feedback', messageFeedback.id, 'view']">{{ messageFeedback.id }}</a></td>
+                    <td>{{ messageFeedback.systemId }}</td>
+                    <td>{{ messageFeedback.centerId }}</td>
+                    <td>{{ messageFeedback.systemServicesId }}</td>
+                    <td>{{ messageFeedback.counter }}</td>
+                    <td>{{ messageFeedback.trsId }}</td>
+                    <td>{{ messageFeedback.userId }}</td>
+                    <td>{{ messageFeedback.message }}</td>
+                    <td>{{ messageFeedback.status }}</td>
+                    <td>{{ messageFeedback.feedback }}</td>
+                    <td>{{ messageFeedback.applicantName }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/message-feedback', messageFeedback.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/message-feedback', messageFeedback.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(messageFeedback)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="messageFeedbacks && messageFeedbacks.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

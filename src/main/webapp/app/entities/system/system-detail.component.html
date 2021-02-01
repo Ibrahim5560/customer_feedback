@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="system">
+            <h2><span jhiTranslate="customerFeedBackApp.system.detail.title">System</span> {{ system.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="customerFeedBackApp.system.nameAr">Name Ar</span></dt>
+                <dd>
+                    <span>{{ system.nameAr }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.system.nameEn">Name En</span></dt>
+                <dd>
+                    <span>{{ system.nameEn }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.system.code">Code</span></dt>
+                <dd>
+                    <span>{{ system.code }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.system.status">Status</span></dt>
+                <dd>
+                    <span>{{ system.status }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/system', system.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
