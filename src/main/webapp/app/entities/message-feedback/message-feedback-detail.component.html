@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="messageFeedback">
+            <h2><span jhiTranslate="customerFeedBackApp.messageFeedback.detail.title">Message Feedback</span> {{ messageFeedback.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.systemId">System Id</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.systemId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.centerId">Center Id</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.centerId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.systemServicesId">System Services Id</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.systemServicesId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.counter">Counter</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.counter }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.trsId">Trs Id</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.trsId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.userId">User Id</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.userId }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.message">Message</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.message }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.status">Status</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.feedback">Feedback</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.feedback }}</span>
+                </dd>
+                <dt><span jhiTranslate="customerFeedBackApp.messageFeedback.applicantName">Applicant Name</span></dt>
+                <dd>
+                    <span>{{ messageFeedback.applicantName }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/message-feedback', messageFeedback.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
